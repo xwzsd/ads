@@ -4,6 +4,7 @@ describe 'return ad list' do
   it 'should allow accessing the home page and return ad list' do
     get '/'
     expect(last_response.status).to eq 200
+    expect(last_response.body).not_to be_empty
   end
 end
 
