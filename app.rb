@@ -14,11 +14,6 @@ require 'pry'
 
 include ::PaginationLinks
 
-class App < Sinatra::Base
-  set :show_exceptions, :after_handler
-  helpers Sinatra::UrlForHelper
-end
-
 error do
   e = request.env['sinatra.error']
   Kernel.puts e.backtrace.join("\n")
@@ -29,6 +24,11 @@ current_dir = Dir.pwd
 Dir["#{current_dir}/models/*.rb"].each { |file| require file }
 Dir["#{current_dir}/app/serializers/*.rb"].each { |file| require file }
 Dir["#{current_dir}/app/services/*.rb"].each { |file| require file }
+
+class App < Sinatra::Base
+  set :show_exceptions, :after_handler
+  helpers Sinatra::UrlForHelper
+end
 
 before do
   content_type :json
