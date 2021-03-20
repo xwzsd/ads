@@ -1,14 +1,14 @@
 module PaginationLinks
-  def pagination_links(scope)
-    return {} if scope.total_pages.zero?
+  def pagination_links(dataset)
+    return {} if dataset.pagination_record_count.zero?
 
     links = {
       first: pagination_link(page: 1),
-      last: pagination_link(page: scope.total_pages)
+      last: pagination_link(page: dataset.page_count)
     }
 
-    links[:next] = pagination_link(page: scope.next_page) if scope.next_page.present?
-    links[:prev] = pagination_link(page: scope.prev_page) if scope.prev_page.present?
+    links[:next] = pagination_link(page: dataset.next_page) if dataset.next_page.present?
+    links[:prev] = pagination_link(page: dataset.prev_page) if dataset.prev_page.present?
 
     links
   end
@@ -16,6 +16,7 @@ module PaginationLinks
   private
 
   def pagination_link(page:)
-    url_for(request.env['rack.request.query_hash'].merge(only_path: true, page: page))
+    qs = request.GET.merge('page' => page).to_query
+    [request.path, qs].join('?')
   end
 end
