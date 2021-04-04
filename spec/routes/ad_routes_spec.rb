@@ -20,13 +20,14 @@ RSpec.describe AdRoutes, type: :routes do
     let(:auth_token) { 'auth.token' }
     let(:auth_service) { instance_double('Auth service') }
     let(:geocoder_service) { instance_double('Geocoder service') }
+    let(:city) { 'city' }
     before do
       allow(auth_service).to receive(:auth)
         .with(auth_token)
         .and_return(user_id)
 
-      allow(geocoder_service).to receive(:geocoder)
-        .with('city')
+      allow(geocoder_service).to receive(:coordinates)
+        .with(city)
         .and_return(geocode_result)
 
       allow(AuthService::Client).to receive(:new).and_return(auth_service)
@@ -51,6 +52,8 @@ RSpec.describe AdRoutes, type: :routes do
           city: ''
         }
       end
+
+      let(:city) { nil }
 
       it 'returns an error' do
         post '/v1', ad: ad_params
@@ -95,6 +98,7 @@ RSpec.describe AdRoutes, type: :routes do
       end
 
       let(:last_ad) { Ad.last }
+      let(:city) { nil }
 
       it 'creates a new ad' do
         expect { post '/v1', ad: ad_params }
