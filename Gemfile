@@ -13,6 +13,7 @@ gem 'config', '~> 2.2.1'
 
 gem 'pg', '~> 1.2.3'
 gem 'sequel', '~> 5.32.0'
+gem 'bunny', '~> 2.15.0'
 
 gem 'dry-initializer', '~> 3.0.3'
 gem 'dry-validation', '~> 1.5.0'
@@ -21,6 +22,7 @@ gem 'activesupport', '~> 6.0.0', require: false
 gem 'fast_jsonapi', '~> 1.5'
 gem 'faraday', '~> 1.3'
 gem 'faraday_middleware', '~> 1.0'
+gem 'byebug'
 
 group :test do
   gem 'rspec', '~> 3.9.0'

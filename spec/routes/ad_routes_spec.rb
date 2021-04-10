@@ -19,19 +19,19 @@ RSpec.describe AdRoutes, type: :routes do
     let(:geocode_result) { { lat: 45.05, lon: 90.05 } }
     let(:auth_token) { 'auth.token' }
     let(:auth_service) { instance_double('Auth service') }
-    let(:geocoder_service) { instance_double('Geocoder service') }
+    # let(:geocoder_service) { instance_double('Geocoder service') }
     let(:city) { 'city' }
     before do
       allow(auth_service).to receive(:auth)
         .with(auth_token)
         .and_return(user_id)
 
-      allow(geocoder_service).to receive(:coordinates)
-        .with(city)
-        .and_return(geocode_result)
+      # allow(geocoder_service).to receive(:coordinates)
+      #   .with(city)
+      #   .and_return(geocode_result)
 
       allow(AuthService::Client).to receive(:new).and_return(auth_service)
-      allow(GeocoderService::Client).to receive(:new).and_return(geocoder_service)
+      # allow(GeocoderService::Client).to receive(:new).and_return(geocoder_service)
 
       header 'Authorization', "Bearer #{auth_token}"
     end
