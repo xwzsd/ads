@@ -11,6 +11,7 @@ module AuthService
     option :reply_queue, default: proc { create_reply_queue }
     option :lock, default: proc { Mutex.new }
     option :condition, default: proc { ConditionVariable.new }
+    option :exchange,  default: proc { RabbitMq.channel.default_exchange }
 
     def self.fetch
       Thread.current['auth_service.rpc_client'] ||= new.start
@@ -32,7 +33,7 @@ module AuthService
     def publish(token, opts = {})
       @correlation_id = SecureRandom.uuid
 
-      RabbitMq.exchange.publish(
+      exchange.publish(
         token,
         opts.merge!(
           persistent: true,
