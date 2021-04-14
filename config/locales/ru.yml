@@ -1,2 +1,4 @@
-ru:
-  hello: "Привет мир"
+services:
+  ads:
+    update_service:
+      not_found: 'Объявление не найдено'
