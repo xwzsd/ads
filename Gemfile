@@ -25,6 +25,7 @@ gem 'faraday_middleware', '~> 1.0'
 gem 'byebug'
 gem 'rack-ougai', '~> 0.2.1'
 gem 'rack-request-id', '~> 0.0.4'
+gem 'amazing_print', '~> 1.3'
 
 group :test do
   gem 'rspec', '~> 3.9.0'
