@@ -15,7 +15,8 @@ module Ads
 
     def call
       @ad = ::Ad.new(@ad.to_h)
-      @ad.user_id = @user_id
+      JSON.parse(user_id)['user_id']
+      @ad.user_id = JSON.parse(@user_id)['user_id']
 
       if @ad.valid?
         @ad.save

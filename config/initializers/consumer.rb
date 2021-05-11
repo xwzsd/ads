@@ -7,6 +7,7 @@ queue.subscribe do |delivery_info, properties, payload|
   lat,lon = payload['coordinates']
 
   Ads::UpdateService.call(payload['id'], {lat: lat, lon: lon} )
+  Application.logger.info(payload)
 
   exchange.publish(
     '',

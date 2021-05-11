@@ -1,13 +1,16 @@
+app:
+  name: ads
 db:
   adapter: postgresql
   host: localhost
   user: postgres
 pagination:
   page_size: 10
-
 microservices:
   auth_url: http://localhost:3010/v1/auth
   geocoder_url: http://localhost:3011/geocoders
-
 rabbitmq:
   consumer_pool: 10
+logger:
+  path: log/app.log
+  level: info
