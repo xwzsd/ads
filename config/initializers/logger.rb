@@ -1,6 +1,8 @@
+logdev = Application.environment.eql?('production') ? STDOUT : Application.root.concat('/', Settings.logger.path)
+
 Application.configure do |app|
   logger = Ougai::Logger.new(
-    app.root.concat('/', Settings.logger.path),
+    logdev,
     level: Settings.logger.level
   )
 
